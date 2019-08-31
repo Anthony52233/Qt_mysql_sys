@@ -18,6 +18,9 @@ public:
 
 public slots:
     void process_indent_info();//处理客户选择的订单信息。
+    //void on_tableWidget_indent_clicked();//当我的订单页面被选中时调用此函数。（废）
+    void show_indent_info();//显示客户订单信息。
+    void process_clearing();
 
 private:
     Ui::custom_show *ui;

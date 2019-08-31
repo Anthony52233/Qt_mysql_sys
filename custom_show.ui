@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>791</width>
+    <width>1255</width>
     <height>598</height>
    </rect>
   </property>
@@ -16,9 +16,9 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>50</y>
-     <width>701</width>
+     <width>1231</width>
      <height>471</height>
     </rect>
    </property>
@@ -26,7 +26,7 @@
     <enum>QTabWidget::West</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab_browse">
     <attribute name="title">
@@ -37,7 +37,7 @@
       <rect>
        <x>30</x>
        <y>20</y>
-       <width>611</width>
+       <width>811</width>
        <height>361</height>
       </rect>
      </property>
@@ -63,18 +63,18 @@
     <widget class="QTableWidget" name="tableWidget_indent">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>50</y>
-       <width>581</width>
-       <height>331</height>
+       <x>10</x>
+       <y>10</y>
+       <width>1171</width>
+       <height>361</height>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="pushButton_clearing">
      <property name="geometry">
       <rect>
-       <x>290</x>
-       <y>410</y>
+       <x>130</x>
+       <y>400</y>
        <width>89</width>
        <height>25</height>
       </rect>

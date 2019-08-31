@@ -24,8 +24,14 @@ public:
     QString year;
     QString month;
     QString day;
+
+public slots:
+    void on_pushButton_submit_clicked();//提交按钮被点击时的相应事件。
 private:
     Ui::indent_show *ui;
+
+signals:
+    void want_to_refresh_indent();
 
 };
 

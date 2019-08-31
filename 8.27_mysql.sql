@@ -160,3 +160,19 @@ alter table customs add constraint sex_check check(sex in("man","woman"));
 update customs set sex = "1" where user_name = "1";
 
 #定义一个视图，用于客户浏览相机信息
+use czs;
+select * from indents;
+insert into indent values("1567229141", "1", 0, "Sony12", "1567229142", "1567180800", 0);
+select * from indent where user_name = "1";
+select price from cameras where camera_no = "Sony12";
+select price from cameras where camera_no = "Sony1";
+
+#创建我的订单视图
+drop view my_indent;
+create view my_indent(order_no, user_name, camera_no, rent_num, price, start_time, rent_time, rent_days, rent_charge, extra_charge, finall_charge)
+as select order_no, user_name, indents.camera_no, indents.rent_num, price, start_time, rent_time, (rent_time-start_time)/(24*60*60), indents.rent_num*(rent_time-start_time)/(24*60*60)*price as rent_charge, extra_charge, rent_charge + extra_charge
+from indents, cameras
+where indents.camera_no = cameras.camera_no;
+
+select * from my_indent;
+delete from indents where user_name = "2";

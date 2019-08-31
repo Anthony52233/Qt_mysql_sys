@@ -38,11 +38,11 @@ void Widget::process_login_info()
 
     //进入数据库验证
     QString command = QString("select user_password from customs where user_name = \"%1\"").arg(user_name);
-    qDebug() << command;
+    //qDebug() << command;
     QSqlQuery query(command);
     query.exec();
     QSqlRecord sqlRecord = query.record();
-    qDebug() << "行数：" << query.size() << "列数：" << sqlRecord.count();
+    //qDebug() << "行数：" << query.size() << "列数：" << sqlRecord.count();
     query.first();//指向第一条数据，应该只有一条
     if(user_passwd != query.value(0).toString())//这条记录的第一列。
     {
@@ -55,7 +55,7 @@ void Widget::process_login_info()
     //这里触发一个登录成功信号
     //emit success_to_login();
     this->hide();
-    custom_show *s = new custom_show;
+    custom_show *s = new custom_show();
     s->show();
 }
 
