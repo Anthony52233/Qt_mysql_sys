@@ -17,6 +17,13 @@ custom_show::custom_show(QWidget *parent) :
     connect(ui->pushButton_place_order, &QPushButton::clicked, this, &custom_show::process_indent_info);
     connect(ui->pushButton_clearing, &QPushButton::clicked, this, &custom_show::process_clearing);
 
+    //由用户支付费用引起的订单变化，需要刷新我的订单。
+    connect(this, SIGNAL(want_to_refresh_indent()), this, SLOT(show_indent_info()));
+
+    //单元格设置为只读。
+    ui->tableWidget_browse->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWidget_indent->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
     //connect(ui->tab_indent, &QTableWidget::clicked, this, &custom_show::on_tableWidget_indent_clicked);
     //按下下单按钮，就出现indent_show界面
     //indent_show* s = new indent_show;
@@ -30,20 +37,14 @@ custom_show::~custom_show()
 
 void custom_show::process_clearing()
 {
-    QList<QTableWidgetItem*> items = ui->tableWidget_indent->selectedItems();
-    if(items.size() == 0)
-    {
-        QMessageBox::about(this, "错误！", "你没有选中要结算的账单！");
-        return;
-    }
-    //将总租金转换为float型。
-    QTableWidgetItem* item = items.at(0);
-    float final_charge = item->text().toFloat();
-    qDebug() << final_charge;
+    int current_row = ui->tableWidget_indent->currentRow();//表格中选中的行数。
+    float final_charge = ui->tableWidget_indent->item(current_row, 10)->text().toFloat();
+    qDebug() <<"总费用：" << final_charge;
 
     //获取当前用户的余额。
     QString command = tr("select balance from customs where user_name = \"%1\";").arg(Widget::user_name);
     QSqlQuery query(command);
+    //qDebug() << "结算命令：" << command;
     int nRow = query.size();
     if(nRow != 1)
     {
@@ -68,8 +69,21 @@ void custom_show::process_clearing()
         return;
     }
     //将账户余额重新写入账户里。
-    command = tr("update customs set balance = \"%1\";").arg(balance);
-    query.exec(command);
+    command = tr("update customs set balance = \"%1\" where user_name = \"%2\";").arg(balance).arg(Widget::user_name);
+    QSqlQuery query_update_balance(command);
+    query_update_balance.exec();
+    //结算成功，删除这条记录
+    QMessageBox::about(this, "正确！", "你已成功支付费用！");
+    //开始删除
+    //qDebug() << "现在的行：" << ui->tableWidget_indent->currentRow();
+
+    QString order_no = ui->tableWidget_indent->item(current_row, 0)->text();//获取该行的订单编号
+    command = tr("delete from indents where order_no = \"%1\";").arg(order_no);
+    //qDebug() << "删除命令：" << command;
+    QSqlQuery query_delete_indent(command);
+    query_delete_indent.exec();
+    //数据库删除完毕，这里触发一个刷新信号
+    emit want_to_refresh_indent();
 }
 
 //暂时不需要

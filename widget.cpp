@@ -6,8 +6,10 @@
 #include <QSqlRecord>
 #include <QtDebug>
 #include "custom_show.h"
+#include "admin_show.h"
 
 QString Widget::user_name = "null";
+QString Widget::admin_name = "null";
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -35,9 +37,25 @@ void Widget::process_login_info()
     //获取用户的信息
     QString user_name = ui->lineEdit_account->text();
     QString user_passwd = ui->lineEdit_password->text();
+    QString command;
+    bool isAdmin = false;
+    qDebug() << "check box:" << ui->checkBox_admin->isChecked();
+    if(ui->checkBox_admin->isChecked() == true)
+    {
+        isAdmin = true;
+    }
 
-    //进入数据库验证
-    QString command = QString("select user_password from customs where user_name = \"%1\"").arg(user_name);
+    if(isAdmin)
+    {
+        //查询admins表中数据
+        command = QString("select admin_password from admins where admin_name = \"%1\"").arg(user_name);
+    }
+    else
+    {
+        //进入数据库验证
+        command = QString("select user_password from customs where user_name = \"%1\"").arg(user_name);
+    }
+
     //qDebug() << command;
     QSqlQuery query(command);
     query.exec();
@@ -51,12 +69,26 @@ void Widget::process_login_info()
         return;
     }
     //登录成功
-    Widget::user_name = user_name;
+    if(isAdmin)
+    {
+        Widget::admin_name = user_name;
+    }
+    else {
+        Widget::user_name = user_name;
+    }
+
     //这里触发一个登录成功信号
     //emit success_to_login();
     this->hide();
-    custom_show *s = new custom_show();
-    s->show();
+    if(isAdmin)//是管理员用户，跳转到管理员界面
+    {
+        admin_show *s = new admin_show();
+        s->show();
+    }
+    else {//否则跳转到用户界面
+        custom_show *s = new custom_show();
+        s->show();
+    }
 }
 
 int Widget::login()

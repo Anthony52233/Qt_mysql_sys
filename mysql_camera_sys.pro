@@ -25,18 +25,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        admin_show.cpp \
         custom_show.cpp \
+        dialog_add_admin.cpp \
+        dialog_edit_admin.cpp \
         indent_show.cpp \
         main.cpp \
         widget.cpp
 
 HEADERS += \
+        admin_show.h \
         custom_show.h \
+        dialog_add_admin.h \
+        dialog_edit_admin.h \
         indent_show.h \
         widget.h
 
 FORMS += \
+        admin_show.ui \
         custom_show.ui \
+        dialog_add_admin.ui \
+        dialog_edit_admin.ui \
         indent_show.ui \
         widget.ui
 

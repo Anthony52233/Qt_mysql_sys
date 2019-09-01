@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>admin_show</class>
+ <widget class="QWidget" name="admin_show">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>891</width>
+    <height>557</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>40</y>
+     <width>821</width>
+     <height>461</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab_admins">
+    <attribute name="title">
+     <string>管理管理员信息</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidget_admin">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>261</width>
+       <height>361</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>账户名</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>密码</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QPushButton" name="pushButton_add_admin">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>80</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>增加管理员</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_delete_admin">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>150</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string> 删除管理 员</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_alter_admin">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>210</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>修改管理员</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_customs">
+    <attribute name="title">
+     <string>管理用户信息</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="tab_cameras">
+    <attribute name="title">
+     <string>管理相机信息</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>管理订单信息</string>
+    </attribute>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

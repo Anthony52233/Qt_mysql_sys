@@ -170,9 +170,12 @@ select price from cameras where camera_no = "Sony1";
 #创建我的订单视图
 drop view my_indent;
 create view my_indent(order_no, user_name, camera_no, rent_num, price, start_time, rent_time, rent_days, rent_charge, extra_charge, finall_charge)
-as select order_no, user_name, indents.camera_no, indents.rent_num, price, start_time, rent_time, (rent_time-start_time)/(24*60*60), indents.rent_num*(rent_time-start_time)/(24*60*60)*price as rent_charge, extra_charge, rent_charge + extra_charge
+as select order_no, user_name, indents.camera_no, indents.rent_num, price, start_time, rent_time, (rent_time-start_time)/(24*60*60), indents.rent_num*(rent_time-start_time)/(24*60*60)*price, extra_charge, indents.rent_num*(rent_time-start_time)/(24*60*60)*price + extra_charge
 from indents, cameras
 where indents.camera_no = cameras.camera_no;
 
 select * from my_indent;
 delete from indents where user_name = "2";
+select * from customs;
+select * from admins;
+update customs set balance=1000 where user_name = '3';

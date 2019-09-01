@@ -16,6 +16,7 @@ public:
     ~Widget();
     int login();//连接数据库
     static QString user_name;
+    static QString admin_name;
 
 
 public slots:
