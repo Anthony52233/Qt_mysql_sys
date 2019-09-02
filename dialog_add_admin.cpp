@@ -20,8 +20,8 @@ void Dialog_add_admin::on_pushButton_commit_clicked()
 {
     QString admin_account = ui->lineEdit_account->text();
     QString admin_password = ui->lineEdit_password->text();
-    QString commamd = tr("insert into admins values(%1, %2);").arg(admin_account).arg(admin_password);
-    QSqlQuery query(commamd);
+    QString command = tr("insert into admins values(%1, %2);").arg(admin_account).arg(admin_password);
+    QSqlQuery query(command);
 //    if(!query.exec());//该语句总是返回false，有待解决
 //        QMessageBox::about(this, "错误", "sql语句执行失败！");
     emit want_to_refresh_admin_info();

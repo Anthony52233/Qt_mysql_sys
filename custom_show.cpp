@@ -12,6 +12,7 @@ custom_show::custom_show(QWidget *parent) :
     ui(new Ui::custom_show)
 {
     ui->setupUi(this);
+    setWindowTitle("用户界面");
     show_cam_info();//在创建该页面时就更新相机表格中的数据
     show_indent_info();//更新订单界面的信息
     connect(ui->pushButton_place_order, &QPushButton::clicked, this, &custom_show::process_indent_info);
@@ -99,14 +100,19 @@ void custom_show::process_indent_info()
 {
     //获取客户选中的相机信息
     //先默认一次只能下单一个相机吧。
-    QList<QTableWidgetItem*> items = ui->tableWidget_browse->selectedItems();
-    if(items.size() == 0)
-    {
-        QMessageBox::about(this, "错误！", "你没有选中相机编号！");
-        return;
-    }
-    QTableWidgetItem* item = items.at(0);
-    QString camera_no = item->text();//这里获得相机编号
+    /*
+代码2.0更新，选中一行就行，无需特定选中相机编号属性。
+*/
+    int current_row = ui->tableWidget_browse->currentRow();//表格中选中的行数。
+    QString camera_no = ui->tableWidget_browse->item(current_row, 0)->text();
+//    QList<QTableWidgetItem*> items = ui->tableWidget_browse->selectedItems();
+//    if(items.size() == 0)
+//    {
+//        QMessageBox::about(this, "错误！", "你没有选中相机编号！");
+//        return;
+//    }
+//    QTableWidgetItem* item = items.at(0);
+//    QString camera_no = item->text();//这里获得相机编号
     qDebug() << camera_no;
     //触发相机编号信号，好让indent_show界面接收到相机编号信息，用于其界面提交按钮发送命令到数据库。
 
@@ -115,6 +121,7 @@ void custom_show::process_indent_info()
     s->setCameraNo(camera_no);
     s->show();
     connect(s, SIGNAL(want_to_refresh_indent()), this, SLOT(show_indent_info()));
+    connect(s, SIGNAL(want_to_refresh_camera()),this, SLOT(show_cam_info()));
 }
 
 
@@ -122,6 +129,7 @@ void custom_show::show_cam_info()
 {
     //更新相机信息。
     QString command = "select * from cameras";
+    qDebug() <<"showCameInfo:" <<command;
     QSqlQuery query(command);
     int nRow = query.size();
     QSqlRecord sqlRecord = query.record();

@@ -31,7 +31,8 @@ private:
     Ui::indent_show *ui;
 
 signals:
-    void want_to_refresh_indent();
+    void want_to_refresh_indent();//刷新订单
+    void want_to_refresh_camera();//刷新相机信息
 
 };
 

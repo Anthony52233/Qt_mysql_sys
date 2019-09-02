@@ -6,6 +6,7 @@
 #include "widget.h"
 #include <QSqlQuery>
 #include <QMessageBox>
+#include <QSqlRecord>
 
 
 indent_show::indent_show(QWidget *parent) :
@@ -53,6 +54,26 @@ void indent_show::on_pushButton_submit_clicked()
     int extra_charge = 0;
     //数值获取完毕
     //打包mysql语句
+    //更新camereas表中的rent_num属性，先获取该相机已租量
+    QString command_search_rent_num = tr("select rent_num, total_num from cameras where camera_no = \"%1\";").arg(cameras_no);
+    QSqlQuery query_search_rent_num(command_search_rent_num);
+    query_search_rent_num.exec();
+    query_search_rent_num.first();
+    int last_rent_num = query_search_rent_num.value(0).toInt();//查询到的已租量
+    int last_total_num = query_search_rent_num.value(1).toInt();//查询到总量，一般为定值
+    if(last_rent_num + rent_num > last_total_num)//已租赁的超过存货
+    {
+        QMessageBox::about(this, "错误", "该相机余量不足！");
+        return;
+    }
+    //余量足，更新cameras表中的rent_num属性
+    last_rent_num += rent_num;
+    QString command_update_camera_num = tr("update cameras set rent_num = %1 where camera_no = \"%2\";").arg(last_rent_num).arg(cameras_no);
+    qDebug() <<"command_update_camera_num:" << command_update_camera_num << "rent_num" << last_rent_num <<", total_num:" << last_total_num;
+    QSqlQuery query_update_camera_num(command_update_camera_num);
+    query_update_camera_num.exec();
+    //余量更新完毕
+
     QString command = QString("insert into indents values(\"%1\", \"%2\", %3, \"%4\", \"%5\", \"%6\", %7);").arg(order_no).arg(user_name).arg(rent_num).arg(cameras_no).arg(start_time).arg(rent_time).arg(extra_charge);
     qDebug() << command;
     QSqlQuery query(command);
@@ -62,6 +83,7 @@ void indent_show::on_pushButton_submit_clicked()
         QMessageBox::about(this,"成功", "订单提交成功！");
     }
     emit want_to_refresh_indent();//触发一个刷新我的订单的信号。在custom_show界面处理该信号
+    emit want_to_refresh_camera();//因为rent_num量改变，刷新下相机信息。
     this->close();
 }
 

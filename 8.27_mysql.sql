@@ -178,4 +178,10 @@ select * from my_indent;
 delete from indents where user_name = "2";
 select * from customs;
 select * from admins;
+select * from cameras;
 update customs set balance=1000 where user_name = '3';
+insert into customs values("4", "4", 4, "woman", "120");
+delete from customs where user_name = `cuntom10`;
+select rent_num, total_num from cameras where camera_no = "Sony14";
+SET SQL_SAFE_UPDATES = 1;#关闭安全模式
+update cameras set rent_num = 0;

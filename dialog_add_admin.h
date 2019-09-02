@@ -23,6 +23,7 @@ private:
 
 signals:
     void want_to_refresh_admin_info();
+
 };
 
 #endif // DIALOG_ADD_ADMIN_H

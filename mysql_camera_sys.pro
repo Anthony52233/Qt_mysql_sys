@@ -28,7 +28,12 @@ SOURCES += \
         admin_show.cpp \
         custom_show.cpp \
         dialog_add_admin.cpp \
+        dialog_add_custom.cpp \
         dialog_edit_admin.cpp \
+        dialog_edit_custom.cpp \
+        dialog_edit_indent.cpp \
+        dialog_find_admin.cpp \
+        dialog_find_custom.cpp \
         indent_show.cpp \
         main.cpp \
         widget.cpp
@@ -37,7 +42,12 @@ HEADERS += \
         admin_show.h \
         custom_show.h \
         dialog_add_admin.h \
+        dialog_add_custom.h \
         dialog_edit_admin.h \
+        dialog_edit_custom.h \
+        dialog_edit_indent.h \
+        dialog_find_admin.h \
+        dialog_find_custom.h \
         indent_show.h \
         widget.h
 
@@ -45,7 +55,12 @@ FORMS += \
         admin_show.ui \
         custom_show.ui \
         dialog_add_admin.ui \
+        dialog_add_custom.ui \
         dialog_edit_admin.ui \
+        dialog_edit_custom.ui \
+        dialog_edit_indent.ui \
+        dialog_find_admin.ui \
+        dialog_find_custom.ui \
         indent_show.ui \
         widget.ui
 

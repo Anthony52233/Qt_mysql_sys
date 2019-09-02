@@ -8,6 +8,7 @@ Dialog_edit_admin::Dialog_edit_admin(QWidget *parent) :
     ui(new Ui::Dialog_edit_admin)
 {
     ui->setupUi(this);
+    ui->lineEdit_account->setReadOnly(true);//设置账户信息不可编辑
 }
 
 Dialog_edit_admin::~Dialog_edit_admin()

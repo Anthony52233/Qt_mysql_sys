@@ -14,12 +14,13 @@ class custom_show : public QWidget
 public:
     explicit custom_show(QWidget *parent = nullptr);
     ~custom_show();
-    void show_cam_info();//显示相机的信息。
+
 
 public slots:
     void process_indent_info();//处理客户选择的订单信息。
     //void on_tableWidget_indent_clicked();//当我的订单页面被选中时调用此函数。（废）
     void show_indent_info();//显示客户订单信息。
+    void show_cam_info();//显示相机的信息。
     void process_clearing();
 
 private:
