@@ -10,20 +10,26 @@
     <height>557</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTabWidget" name="tabWidget">
+  <widget class="QTabWidget" name="tabWidget_camera">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
+     <x>10</x>
+     <y>30</y>
      <width>1151</width>
      <height>461</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tab_admins">
     <attribute name="title">
@@ -249,12 +255,12 @@
     <attribute name="title">
      <string>管理相机信息</string>
     </attribute>
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QTableWidget" name="tableWidget_camera">
      <property name="geometry">
       <rect>
        <x>30</x>
        <y>70</y>
-       <width>531</width>
+       <width>571</width>
        <height>192</height>
       </rect>
      </property>
@@ -283,6 +289,110 @@
        <string>单价/天</string>
       </property>
      </column>
+    </widget>
+    <widget class="QPushButton" name="pushButton_add_camera">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>110</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>增加相机</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_delete_camera">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>170</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>删除相机</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_edit_camera">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>220</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>修改相机</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_find_camera">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>270</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>查找相机</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>310</y>
+       <width>109</width>
+       <height>108</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>GroupBox</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QRadioButton" name="radioButton_manage_camera_no">
+        <property name="text">
+         <string>相机编号</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_manage_camera_name">
+        <property name="text">
+         <string>相机型号</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="pushButton_show_camera">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>60</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>显示相机</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_find_camera_content">
+     <property name="geometry">
+      <rect>
+       <x>810</x>
+       <y>270</y>
+       <width>113</width>
+       <height>25</height>
+      </rect>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_4">
@@ -378,6 +488,205 @@
      </property>
      <property name="text">
       <string>修改订单</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>240</y>
+       <width>136</width>
+       <height>125</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>根据下面属性查找：</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_indent_no">
+        <property name="text">
+         <string> 订单编号</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="radioButton_name">
+        <property name="text">
+         <string>用户名</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="radioButton_camera_no">
+        <property name="text">
+         <string>相机编号</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_content">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>230</y>
+       <width>113</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>220</y>
+       <width>109</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>按下面属性排序：</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QRadioButton" name="radioButton_sort_rent_num">
+        <property name="text">
+         <string>租借数量</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_sort_rent_days">
+        <property name="text">
+         <string>租借天数</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_sort_rent_charge">
+        <property name="text">
+         <string>租借费用</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_sort_extra_charge">
+        <property name="text">
+         <string>额外费用</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_sort_final_charge">
+        <property name="text">
+         <string> 总费用</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="pushButton_sort">
+     <property name="geometry">
+      <rect>
+       <x>770</x>
+       <y>250</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>排序</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_show_indent">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>270</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>显示订单</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>切换用户</string>
+    </attribute>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>100</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>用户名：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_account">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>100</y>
+       <width>113</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_login">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>260</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>登录</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>160</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>密码：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_password">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>160</y>
+       <width>113</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>30</y>
+       <width>351</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>注意：切换用户不需要密码，切换管理员需要密码！</string>
      </property>
     </widget>
    </widget>

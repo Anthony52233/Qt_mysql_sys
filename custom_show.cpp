@@ -6,6 +6,7 @@
 #include "indent_show.h"
 #include <QMessageBox>
 #include "widget.h"
+#include "admin_show.h"
 
 custom_show::custom_show(QWidget *parent) :
     QWidget(parent),
@@ -13,6 +14,7 @@ custom_show::custom_show(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("用户界面");
+    ui->radioButton_admin->setChecked(true);//默认管理员被选中
     show_cam_info();//在创建该页面时就更新相机表格中的数据
     show_indent_info();//更新订单界面的信息
     connect(ui->pushButton_place_order, &QPushButton::clicked, this, &custom_show::process_indent_info);
@@ -225,4 +227,54 @@ void custom_show::show_indent_info()
 //        }
 //        i++;
 //    }while(query.next());
+}
+
+void custom_show::on_pushButton_login_clicked()
+{
+    QString account = ui->lineEdit_account->text();
+    QString password = ui->lineEdit_password->text();
+    bool isAdmin = false;
+    if(ui->radioButton_admin->isChecked())
+    {
+        isAdmin = true;
+    }
+    else if(ui->radioButton_custom->isChecked())
+    {
+        isAdmin = false;
+    }
+    QString command;
+    if(isAdmin)
+    {
+        //查询admins表中数据
+        command = QString("select admin_password from admins where admin_name = \"%1\"").arg(account);
+    }
+    else
+    {
+        //查看是否有该用户
+        command = QString("select user_password from customs where user_name = \"%1\"").arg(account);
+    }
+
+    QSqlQuery query(command);
+    query.exec();
+    query.first();
+    if(password != query.value(0).toString())
+    {
+        //登录失败
+        QMessageBox::about(this,"登录失败", "账号密码错误！");
+        return;
+    }
+    //登录成功
+    if(isAdmin)
+    {
+        Widget::admin_name = account;
+        admin_show *s1 = new admin_show();
+        s1->show();
+        this->close();
+    }
+    else {
+        Widget::user_name = account;
+        custom_show *s2 = new custom_show();
+        s2->show();
+        this->close();
+    }
 }

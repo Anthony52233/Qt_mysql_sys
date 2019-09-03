@@ -9,6 +9,7 @@
 #include "dialog_edit_custom.h"
 #include "dialog_find_custom.h"
 #include "dialog_edit_indent.h"
+#include "dialog_add_camera.h"
 
 
 namespace Ui {
@@ -25,6 +26,7 @@ public:
     void show_admin_info();//显示管理员信息
     void show_custom_info();//显示用户信息
     void show_indent_info();//显示订单信息
+    void show_camera_info();//显示相机信息
 
 
 public slots:
@@ -39,6 +41,7 @@ private:
     Dialog_edit_custom *dialog_edit_custom;
     Dialog_find_custom *dialog_find_custom;
     Dialog_edit_indent *dialog_edit_indent;
+    Dialog_add_camera *dialog_add_camera;
 
 signals:
     void want_to_refresh_admin();
@@ -51,6 +54,14 @@ private slots:
     void on_pushButton_alter_custom_clicked();
     void on_pushButton_find_custom_clicked();
     void on_pushButton_alter_indent_clicked();
+    void on_pushButton_find_indent_clicked();
+    void on_pushButton_login_clicked();
+    void on_pushButton_sort_clicked();
+    void on_pushButton_show_indent_clicked();
+    void on_pushButton_show_camera_clicked();
+    void on_pushButton_add_camera_clicked();
+    void on_pushButton_delete_camera_clicked();
+    void on_pushButton_edit_camera_clicked();
 };
 
 #endif // ADMIN_SHOW_H

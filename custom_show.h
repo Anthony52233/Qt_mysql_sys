@@ -29,6 +29,8 @@ private:
 signals:
     void sendCameraNo(QString camera_no);
     void want_to_refresh_indent();
+private slots:
+    void on_pushButton_login_clicked();
 };
 
 #endif // CUSTOM_SHOW_H

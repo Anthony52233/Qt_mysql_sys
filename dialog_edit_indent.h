@@ -16,8 +16,14 @@ public:
     ~Dialog_edit_indent();
     void setAllInfo(QString, QString, QString, int, int, unsigned int, unsigned int, double, double, double, double);
 
+private slots:
+    void on_pushButton_commit_clicked();
+
 private:
     Ui::Dialog_edit_indent *ui;
+
+signals:
+    void want_to_refresh_indent();
 };
 
 #endif // DIALOG_EDIT_INDENT_H

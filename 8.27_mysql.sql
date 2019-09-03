@@ -179,9 +179,13 @@ delete from indents where user_name = "2";
 select * from customs;
 select * from admins;
 select * from cameras;
+select * from indents;
 update customs set balance=1000 where user_name = '3';
 insert into customs values("4", "4", 4, "woman", "120");
 delete from customs where user_name = `cuntom10`;
 select rent_num, total_num from cameras where camera_no = "Sony14";
 SET SQL_SAFE_UPDATES = 1;#关闭安全模式
 update cameras set rent_num = 0;
+update cameras set rent_num = 3 where camera_no = "Sony0";
+
+update my_indent set user_name = \"1\", camera_no = \"Sony0\", rent_num = 3, price = 100, start_time = \"1567427208\", rent_time = \"1567440000\", rent_days =0.1481 ,rent_charge = 44.4167, extra_charge = 10, final_charge = 44.4167 where order_no = \"1567427206\
