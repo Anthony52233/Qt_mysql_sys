@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include "widget.h"
 #include "custom_show.h"
+#include <QDateTime>
 
 admin_show::admin_show(QWidget *parent) :
     QWidget(parent),
@@ -212,6 +213,11 @@ void admin_show::on_pushButton_delete_custom_clicked()
     QSqlQuery query(command);
     query.exec();
 
+    //manage表中插入数据
+    QString command_insert = tr("insert into update_user values(\"%1\", \"%2\", \"%3\", \"del\");").arg(Widget::admin_name).arg(ui->tableWidget_camera->item(current_row, 0)->text()).arg(QDateTime::currentDateTime().toTime_t());
+    qDebug() << command_insert;
+    QSqlQuery query_insert(command_insert);
+    query_insert.exec();
     show_custom_info();
 }
 
@@ -461,6 +467,11 @@ void admin_show::on_pushButton_delete_camera_clicked()
     qDebug() << "command:" << command;
     QSqlQuery query(command);
     query.exec();
+    //manage表中插入数据
+    QString command_insert = tr("insert into manage values(\"%1\", \"%2\", \"%3\", \"del\");").arg(Widget::admin_name).arg(ui->tableWidget_camera->item(current_row, 0)->text()).arg(QDateTime::currentDateTime().toTime_t());
+    qDebug() << command_insert;
+    QSqlQuery query_insert(command_insert);
+    query_insert.exec();
 
     show_camera_info();
 }

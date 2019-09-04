@@ -3,6 +3,8 @@
 #include <qdebug.h>
 #include <qsqlquery.h>
 #include <QMessageBox>
+#include "widget.h"
+#include <QDateTime>
 
 Dialog_edit_custom::Dialog_edit_custom(QWidget *parent) :
     QDialog(parent),
@@ -30,6 +32,12 @@ void Dialog_edit_custom::on_pushButton_commit_clicked()
 
     QSqlQuery query(command);
     query.exec();
+
+    //manage表中插入数据
+    QString command_insert = tr("insert into update_user values(\"%1\", \"%2\", \"%3\", \"edit\");").arg(Widget::admin_name).arg(account).arg(QDateTime::currentDateTime().toTime_t());
+    qDebug() << command_insert;
+    QSqlQuery query_insert(command_insert);
+    query_insert.exec();
 
     QMessageBox::about(this, "正确", "更新成功！");
     emit want_to_refresh_custom();

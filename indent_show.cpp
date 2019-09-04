@@ -31,6 +31,7 @@ indent_show::indent_show(QWidget *parent) :
     ui->lineEdit_user_name->setReadOnly(true);
     ui->lineEdit_camera_no->setReadOnly(true);
 
+   setWindowTitle("下单界面");
 
     //创建custom_show实例对象
     //custom_show* custom = new custom_show;//这里的custom对象不是发送sendCameraNo信号的对象，所以不触发。
@@ -86,6 +87,12 @@ void indent_show::on_pushButton_submit_clicked()
     {
         QMessageBox::about(this,"成功", "订单提交成功！");
     }
+
+    //往brower表中插入记录
+    QString command_insert = tr("insert into browse values(\"%1\", \"%2\", \"%3\");").arg(user_name).arg(cameras_no).arg(order_no);
+    QSqlQuery query_insert(command_insert);
+    query_insert.exec();
+
     emit want_to_refresh_indent();//触发一个刷新我的订单的信号。在custom_show界面处理该信号
     emit want_to_refresh_camera();//因为rent_num量改变，刷新下相机信息。
     this->close();

@@ -2,6 +2,8 @@
 #include "ui_dialog_add_camera.h"
 #include <QSqlQuery>
 #include <qdebug.h>
+#include "widget.h"
+#include <QDateTime>
 
 bool Dialog_add_camera::edit = false;//初始化为假
 
@@ -43,6 +45,11 @@ void Dialog_add_camera::on_pushButto_add_camera_clicked()
     if(edit)
     {
         command = tr("update cameras set name = \"%2\", total_num = %3, rent_num = %4, price = %5 where camera_no = \"%1\";").arg(no).arg(name).arg(total).arg(rent).arg(price);
+        //manage表中插入数据
+        QString command_insert = tr("insert into manage values(\"%1\", \"%2\", \"%3\", \"edit\");").arg(Widget::admin_name).arg(no).arg(QDateTime::currentDateTime().toTime_t());
+        qDebug() << command_insert;
+        QSqlQuery query_insert(command_insert);
+        query_insert.exec();
     }
     else {
 
@@ -50,6 +57,11 @@ void Dialog_add_camera::on_pushButto_add_camera_clicked()
     }
     qDebug() << "add&edit command" << command;
     QSqlQuery query(command);
+//    //manage表中插入数据
+//    QString command_insert = tr("insert into manage values(\"%1\", \"%2\", \"%3\", \"add\");").arg(Widget::admin_name).arg(no).arg(QDateTime::currentDateTime().toTime_t());
+//    qDebug() << command_insert;
+//    QSqlQuery query_insert(command);
+
     emit want_to_refresh_camera_info();
     this->close();
 

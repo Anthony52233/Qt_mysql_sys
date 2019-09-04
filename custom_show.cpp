@@ -44,6 +44,7 @@ custom_show::~custom_show()
     delete ui;
 }
 
+//结账
 void custom_show::process_clearing()
 {
     int current_row = ui->tableWidget_indent->currentRow();//表格中选中的行数。
