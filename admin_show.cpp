@@ -18,6 +18,10 @@ admin_show::admin_show(QWidget *parent) :
     show_indent_info();//显示订单信息
     show_camera_info();//显示相机信息
 
+    ui->radioButton_manage_camera_no->setChecked(true);
+    ui->radioButton_indent_no->setChecked(true);
+    ui->radioButton_sort_rent_num->setChecked(true);
+
     //ui->tableWidget_indent->setAutoScroll(true);
 
     dialog_add_admin = new Dialog_add_admin (this);//先初始化指针，要不然下面connect函数调用时，程序会崩溃。
@@ -37,6 +41,7 @@ admin_show::admin_show(QWidget *parent) :
     connect(dialog_add_custom, &Dialog_add_custom::want_to_refresh_custom_info, this, &admin_show::show_custom_info);
     connect(dialog_edit_custom, &Dialog_edit_custom::want_to_refresh_custom, this, &admin_show::show_custom_info);
     connect(dialog_edit_indent, &Dialog_edit_indent::want_to_refresh_indent, this, &admin_show::show_indent_info);
+    //这里的dialog_add_camera对象是增加功能的对象，修改功能的对象不是这个。
     connect(dialog_add_camera, &Dialog_add_camera::want_to_refresh_camera_info, this, &admin_show::show_camera_info);
 }
 
@@ -476,7 +481,46 @@ void admin_show::on_pushButton_edit_camera_clicked()
     int price = ui->tableWidget_camera->item(current_row, 4)->text().toInt();
     Dialog_add_camera::edit = true;
     Dialog_add_camera *s = new Dialog_add_camera();
+    connect(s, &Dialog_add_camera::want_to_refresh_camera_info, this, &admin_show::show_camera_info);
     s->setAllInfo(no, name, total, rent, price);
     s->setModal(true);
     s->show();
+}
+
+void admin_show::on_pushButton_find_camera_clicked()
+{
+    bool isNo = false;
+    bool isName = false;
+    QString content = ui->lineEdit_find_camera_content->text();
+    QString command;
+    if(ui->radioButton_manage_camera_no->isChecked())
+    {
+        isNo = true;
+        command = tr("select * from cameras where camera_no = \"%1\";").arg(content);
+    }
+    else if(ui->radioButton_manage_camera_name->isChecked())
+    {
+        isName = true;
+        command = tr("select * from cameras where name = \"%1\";").arg(content);
+    }
+    QSqlQuery query(command);
+    query.exec();
+    int nRow = query.size();
+    QSqlRecord sqlRecord = query.record();
+    int nColumn = sqlRecord.count();
+    ui->tableWidget_camera->setRowCount(nRow);
+    ui->tableWidget_camera->setColumnCount(nColumn);
+    QStringList headers;
+    headers << QStringLiteral("相机编号")<< QStringLiteral("相机型号")<<
+               QStringLiteral("总量")<< QStringLiteral("已借出量")<< QStringLiteral("租金/天");
+    ui->tableWidget_camera->setHorizontalHeaderLabels(headers);
+    int i=0;
+    query.first();
+    do{
+        for(int j=0; j<nColumn; j++)
+        {
+            ui->tableWidget_camera->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+        }
+        i++;
+    }while(query.next());
 }

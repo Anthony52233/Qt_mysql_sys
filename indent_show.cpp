@@ -27,6 +27,10 @@ indent_show::indent_show(QWidget *parent) :
     //为租借数量设默认值
     ui->spinBox_num->setValue(1);
 
+    ui->lineEdit_order_no->setReadOnly(true);
+    ui->lineEdit_user_name->setReadOnly(true);
+    ui->lineEdit_camera_no->setReadOnly(true);
+
 
     //创建custom_show实例对象
     //custom_show* custom = new custom_show;//这里的custom对象不是发送sendCameraNo信号的对象，所以不触发。

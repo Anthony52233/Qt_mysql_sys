@@ -2,144 +2,169 @@
 <ui version="4.0">
  <class>Dialog_add_camera</class>
  <widget class="QDialog" name="Dialog_add_camera">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>449</height>
+    <width>263</width>
+    <height>222</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>30</y>
-     <width>67</width>
-     <height>17</height>
+     <x>9</x>
+     <y>9</y>
+     <width>241</width>
+     <height>204</height>
     </rect>
    </property>
-   <property name="text">
-    <string>相机编号：</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>100</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>相机型号：</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>160</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>总量：</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>260</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>单价：</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_add_camera_no">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>20</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_add_camera_name">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>90</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_add_camera_total_num">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>150</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_add_camera_price">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>240</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButto_add_camera">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>320</y>
-     <width>89</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>提交</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>210</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>已租借量：</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_add_camera_rent_num">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>200</y>
-     <width>113</width>
-     <height>25</height>
-    </rect>
-   </property>
+   <widget class="QLineEdit" name="lineEdit_add_camera_rent_num">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>102</y>
+      <width>142</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>133</y>
+      <width>45</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>单价：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_add_camera_name">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>40</y>
+      <width>142</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>102</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>已租借量：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_add_camera_total_num">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>71</y>
+      <width>142</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>40</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>相机型号：</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButto_add_camera">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>164</y>
+      <width>80</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>提交</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>相机编号：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>71</y>
+      <width>45</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>总量：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_add_camera_price">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>133</y>
+      <width>142</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_add_camera_no">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>9</y>
+      <width>142</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

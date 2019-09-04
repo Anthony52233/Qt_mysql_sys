@@ -16,6 +16,8 @@ Dialog_add_camera::Dialog_add_camera(QWidget *parent) :
         //把rent_num显示出来
         ui->label_4->setVisible(true);
         ui->lineEdit_add_camera_rent_num->setVisible(true);
+        ui->lineEdit_add_camera_no->setReadOnly(true);
+        ui->lineEdit_add_camera_name->setReadOnly(true);
     }
     else {//add使用，rent_num没必要显示出来
         ui->label_4->setVisible(false);
@@ -40,7 +42,7 @@ void Dialog_add_camera::on_pushButto_add_camera_clicked()
     QString command;
     if(edit)
     {
-        command = tr("update cameras set camera_no = \"%1\", name = \"%2\", total_num = %3, rent_num = %4, price = %5);").arg(no).arg(name).arg(total).arg(rent).arg(price);
+        command = tr("update cameras set name = \"%2\", total_num = %3, rent_num = %4, price = %5 where camera_no = \"%1\";").arg(no).arg(name).arg(total).arg(rent).arg(price);
     }
     else {
 

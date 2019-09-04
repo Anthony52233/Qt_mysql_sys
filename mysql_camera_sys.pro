@@ -62,7 +62,6 @@ FORMS += \
         dialog_add_camera.ui \
         dialog_add_custom.ui \
         dialog_edit_admin.ui \
-        dialog_edit_camera.ui \
         dialog_edit_custom.ui \
         dialog_edit_indent.ui \
         dialog_find_admin.ui \

@@ -17,6 +17,8 @@ custom_show::custom_show(QWidget *parent) :
     ui->radioButton_admin->setChecked(true);//默认管理员被选中
     show_cam_info();//在创建该页面时就更新相机表格中的数据
     show_indent_info();//更新订单界面的信息
+    show_balance();//显示余额信息
+
     connect(ui->pushButton_place_order, &QPushButton::clicked, this, &custom_show::process_indent_info);
     connect(ui->pushButton_clearing, &QPushButton::clicked, this, &custom_show::process_clearing);
 
@@ -26,6 +28,10 @@ custom_show::custom_show(QWidget *parent) :
     //单元格设置为只读。
     ui->tableWidget_browse->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableWidget_indent->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->lineEdit_balance->setReadOnly(true);
+    ui->radioButton_price->setChecked(true);
+    ui->radioButton_fnd_no->setChecked(true);
 
     //connect(ui->tab_indent, &QTableWidget::clicked, this, &custom_show::on_tableWidget_indent_clicked);
     //按下下单按钮，就出现indent_show界面
@@ -87,6 +93,7 @@ void custom_show::process_clearing()
     query_delete_indent.exec();
     //数据库删除完毕，这里触发一个刷新信号
     emit want_to_refresh_indent();
+    show_balance();
 }
 
 //暂时不需要
@@ -106,6 +113,11 @@ void custom_show::process_indent_info()
 代码2.0更新，选中一行就行，无需特定选中相机编号属性。
 */
     int current_row = ui->tableWidget_browse->currentRow();//表格中选中的行数。
+    if(current_row == -1)
+    {
+        QMessageBox::about(this, "错误", "请选择一个相机！");
+        return;
+    }
     QString camera_no = ui->tableWidget_browse->item(current_row, 0)->text();
 //    QList<QTableWidgetItem*> items = ui->tableWidget_browse->selectedItems();
 //    if(items.size() == 0)
@@ -126,6 +138,15 @@ void custom_show::process_indent_info()
     connect(s, SIGNAL(want_to_refresh_camera()),this, SLOT(show_cam_info()));
 }
 
+void custom_show::show_balance()
+{
+    QString current_user = Widget::user_name;
+    QString command = tr("select balance from customs where user_name = \"%1\";").arg(current_user);
+    QSqlQuery query(command);
+    query.first();
+    QString balance =  query.value(0).toString();
+    ui->lineEdit_balance->setText(balance);
+}
 
 void custom_show::show_cam_info()
 {
@@ -277,4 +298,87 @@ void custom_show::on_pushButton_login_clicked()
         s2->show();
         this->close();
     }
+}
+
+void custom_show::on_pushButton_find_clicked()
+{
+    QString command;
+    QString content = ui->lineEdit_find->text();
+    if(ui->radioButton_fnd_no->isChecked())
+    {
+        command = tr("select * from cameras where camera_no = \"%1\";").arg(content);
+    }
+    else if(ui->radioButton_find_name->isChecked())
+    {
+        command = tr("select * from cameras where name = \"%1\";").arg(content);
+    }
+    else if(ui->radioButton_find_total->isChecked())
+    {
+        command = tr("select * from cameras where total_num = \"%1\";").arg(content);
+    }
+    else if(ui->radioButton_find_rent->isChecked())
+    {
+        command = tr("select * from cameras where rent_num = \"%1\";").arg(content);
+    }
+    else if(ui->radioButton_find_price->isChecked())
+    {
+        command = tr("select * from cameras where price = \"%1\";").arg(content);
+    }
+
+    qDebug() << "sort 按钮" << command;
+    QSqlQuery query(command);
+    query.exec();
+    int nRow = query.size();
+    QSqlRecord sqlRecord = query.record();
+    int nColumn = sqlRecord.count();
+    ui->tableWidget_browse->setRowCount(nRow);
+    ui->tableWidget_browse->setColumnCount(nColumn);
+    int i=0;
+    query.first();
+    do{
+        for(int j=0; j<nColumn; j++)
+        {
+            ui->tableWidget_browse->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+        }
+        i++;
+    }while(query.next());
+}
+
+void custom_show::on_pushButton_sort_clicked()
+{
+    QString command;
+    if(ui->radioButton_price->isChecked())
+    {
+        command = tr("select * from cameras order by price;");
+    }
+    else if(ui->radioButton_rent_num->isChecked())
+    {
+        command = tr("select * from cameras order by rent_num;");
+    }
+    QSqlQuery query(command);
+    query.exec();
+    int nRow = query.size();
+    QSqlRecord sqlRecord = query.record();
+    int nColumn = sqlRecord.count();
+    ui->tableWidget_browse->setRowCount(nRow);
+    ui->tableWidget_browse->setColumnCount(nColumn);
+    int i=0;
+    query.first();
+    do{
+        for(int j=0; j<nColumn; j++)
+        {
+            ui->tableWidget_browse->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+        }
+        i++;
+    }while(query.next());
+}
+
+void custom_show::on_pushButton_show_clicked()
+{
+    show_cam_info();
+}
+
+void custom_show::on_pushButton_place_order_clicked()
+{
+
 }

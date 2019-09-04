@@ -16,6 +16,7 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    setWindowTitle("登录界面");
     if(login() != 1)
     {
         QMessageBox::about(this,"数据库无法打开", "数据库的配置信息出错或没有该数据库！");

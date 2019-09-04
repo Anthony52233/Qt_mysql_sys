@@ -22,6 +22,7 @@ public slots:
     void show_indent_info();//显示客户订单信息。
     void show_cam_info();//显示相机的信息。
     void process_clearing();
+    void show_balance();//显示当前用户的余额
 
 private:
     Ui::custom_show *ui;
@@ -31,6 +32,10 @@ signals:
     void want_to_refresh_indent();
 private slots:
     void on_pushButton_login_clicked();
+    void on_pushButton_sort_clicked();
+    void on_pushButton_find_clicked();
+    void on_pushButton_show_clicked();
+    void on_pushButton_place_order_clicked();
 };
 
 #endif // CUSTOM_SHOW_H

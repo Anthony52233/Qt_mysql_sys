@@ -62,6 +62,7 @@ private slots:
     void on_pushButton_add_camera_clicked();
     void on_pushButton_delete_camera_clicked();
     void on_pushButton_edit_camera_clicked();
+    void on_pushButton_find_camera_clicked();
 };
 
 #endif // ADMIN_SHOW_H
