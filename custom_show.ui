@@ -136,14 +136,14 @@
               <item>
                <widget class="QRadioButton" name="radioButton_fnd_no">
                 <property name="text">
-                 <string>相机型号</string>
+                 <string>相机编号</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QRadioButton" name="radioButton_find_name">
                 <property name="text">
-                 <string>相机编号</string>
+                 <string>相机型号</string>
                 </property>
                </widget>
               </item>
@@ -307,7 +307,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_password"/>
+            <widget class="QLineEdit" name="lineEdit_password">
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

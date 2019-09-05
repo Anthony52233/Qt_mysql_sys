@@ -62,7 +62,11 @@ show create table indent;
 use czs;
 show create table update_user;
 
-#建立触发器，保证租借数量不大于总量。
+
+
+
+
+#建立触发器，保证租借数量不大于总量。触发器实现断言功能
 delimiter $$
 create trigger camera_total_gt_rent 
 after update
@@ -77,6 +81,32 @@ begin
 end;
 $$
 delimiter ;
+
+update cameras set rent_num = 11 where camera_no = "1";
+
+select * from cameras;
+
+#当生成新的订单，更改cameras表中的rent_num数量。
+delimiter $$
+create trigger update_camera_rent_num
+after insert
+on indents for each row
+begin
+	update cameras set rent_num = new.rent_num+cameras.rent_num where camera_no = new.camera_no;
+end;
+$$
+delimiter ;
+
+drop trigger update_camera_rent_num;
+insert into indents(order_no, user_name, rent_num, camera_no) values("111", "1", "1", "1");
+select * from indents;
+select * from cameras;
+delete from indents where order_no = "111";
+
+update cameras set rent_num = 0 where camera_no = "1";
+
+
+
 
 drop trigger camera_total_gt_rent;
 show variables like '%table_names';
@@ -125,14 +155,14 @@ BEGIN
 DECLARE counter INT;
 SET counter = 0;
 WHILE counter < item DO
-INSERT INTO cameras VALUES(concat("Sony",counter), "Sony is good!", "10", "0", "100");
+INSERT INTO cameras VALUES(concat("leica",counter), "leica", "10", "0", "32");
 SET counter = counter + 1;
 END WHILE;
 END$$
  
 DELIMITER ;
 
-call `insert_camera_table`(100);
+call `insert_camera_table`(10);
 select * from cameras;
 
 DELIMITER $$
@@ -192,3 +222,12 @@ update my_indent set user_name = "1", camera_no = "Sony0", rent_num = 3, price =
 select * from indent order by extra_charge;
 select * from indent;
 select * from cameras;
+select * from browse;
+select * from manage;
+insert into manage values("1", "6", "1567599577", "add");
+insert into manage values("1", "6", "1567600158", "del");
+select * from update_user;
+
+#定义视图
+create index customs_balance_index on customs(balance);
+create index cameras_price_index on cameras(price);

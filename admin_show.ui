@@ -29,7 +29,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="tab_admins">
     <attribute name="title">
@@ -500,7 +500,7 @@
        <x>480</x>
        <y>230</y>
        <width>104</width>
-       <height>112</height>
+       <height>141</height>
       </rect>
      </property>
      <property name="title">
@@ -518,6 +518,13 @@
        <widget class="QPushButton" name="pushButton_alter_indent">
         <property name="text">
          <string>修改订单</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_del_indent">
+        <property name="text">
+         <string>删除订单</string>
         </property>
        </widget>
       </item>
@@ -711,7 +718,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_password"/>
+          <widget class="QLineEdit" name="lineEdit_password">
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

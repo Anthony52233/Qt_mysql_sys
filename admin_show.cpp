@@ -535,3 +535,19 @@ void admin_show::on_pushButton_find_camera_clicked()
         i++;
     }while(query.next());
 }
+
+void admin_show::on_pushButton_del_indent_clicked()
+{
+    int current_row = ui->tableWidget_indent->currentRow();//表格中选中的行数。
+    if(current_row == -1)
+    {
+        QMessageBox::about(this, "错误", "没有选中任何一条记录！");
+        return;
+    }
+    QString no = ui->tableWidget_indent->item(current_row, 0)->text();
+    QString command = tr("delete from indents where order_no = \"%1\";").arg(no);
+    QSqlQuery query(command);
+    qDebug() << "del indet :" << command;
+    query.exec();
+    emit want_to_refresh_admin();
+}

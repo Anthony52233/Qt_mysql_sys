@@ -52,7 +52,7 @@
       <item row="2" column="0">
        <widget class="QPushButton" name="pushButton_commit">
         <property name="text">
-         <string>登录</string>
+         <string>添加</string>
         </property>
        </widget>
       </item>
