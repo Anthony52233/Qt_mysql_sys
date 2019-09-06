@@ -14,6 +14,12 @@
 
 数据库设置如下：  
 建表有：admins、cameras、customs、indents、browse、manage、update_user。  
-表中属性名以及属性值见项目中mysql_table目录下的图片。
+表中属性名以及属性值见项目中mysql_table目录下的图片。  
 
+  
+说明文件文件夹下的  
 
+1、 8.27_mysql.sql是我建数据库用的sql语句，算是测试数据，用处不太大。  
+2、 2019数据库原理课程设计报告.docx和2019数据库原理课程设计报告_陈振山_9月6号.pdf，这两个文件的内容一致。pdf文件用于打印，排版不会乱。
+3、 ER图.eddx是edrawmax软件能识别的类型。我用来画ER图，ER图.png是ER图的图片。  
+4、 大三数据库设计.docx是我在软件开发过程中的随笔记录。
