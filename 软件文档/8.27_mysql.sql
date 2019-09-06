@@ -224,6 +224,7 @@ select * from indent;
 select * from cameras;
 select * from browse;
 select * from manage;
+select * from customs;
 insert into manage values("1", "6", "1567599577", "add");
 insert into manage values("1", "6", "1567600158", "del");
 select * from update_user;
@@ -231,3 +232,6 @@ select * from update_user;
 #定义视图
 create index customs_balance_index on customs(balance);
 create index cameras_price_index on cameras(price);
+
+select * from indents;
+delete from indents where order_no = "111";

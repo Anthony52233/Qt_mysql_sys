@@ -86,3 +86,6 @@ select * from browse;
 delete from browse where time = 1567598864;
 update customs set user_name = "Mike" where user_name = "cuntom10";
 update admins set admin_name = "czs" where admin_name = "4";
+
+use czs;
+show create table update_user;
